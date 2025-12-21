@@ -107,5 +107,5 @@ source $ZSH/oh-my-zsh.sh
 ###########################################################
 # KDDS Custom 
 ###########################################################
-source ~/$ZSH/.kdds_profile
+source $ZSH/.kdds_profile
 
