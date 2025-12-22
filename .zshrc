@@ -116,10 +116,9 @@ source $ZSH/oh-my-zsh.sh
 ###########################################################
 
 # launch tmux automatically at launch
-# setopt nocasematch # make case insensitive
-if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
-  read -p "[Tmux] Launch? (y/N): " launch
-  if [[ ${$launch;;} == "y" ]]; then
+# setopt nocasematch # make case insensitivo
+if command -v tmux &>/dev/null; then
+  if [[ -z "$TMUX" ]]; then
     tmux attach -t default || tmux new-session -s default
   fi
   clear
