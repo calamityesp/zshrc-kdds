@@ -112,6 +112,16 @@ source $ZSH/oh-my-zsh.sh
 
 
 ###########################################################
-# KDDS Custom 
+# KDDS Custom Configuration
 ###########################################################
 
+# launch tmux automatically at launch
+shopt -s nocasematch # make case insensitive
+if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+  read -p "[Tmux] Launch? (y/N): " launch
+  if [[ "$launch" == "y" ]]; then
+    tmux attach -t default || tmux new-session -s default
+  fi
+  clear
+fi
+shopt -u nocasematch  # unset case sensitive
