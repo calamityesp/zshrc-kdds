@@ -11,7 +11,7 @@ source $ZSH/.kdds_profile
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell-kdds"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -116,12 +116,12 @@ source $ZSH/oh-my-zsh.sh
 ###########################################################
 
 # launch tmux automatically at launch
-setopt nocasematch # make case insensitive
+# setopt nocasematch # make case insensitive
 if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
   read -p "[Tmux] Launch? (y/N): " launch
-  if [[ "$launch" == "y" ]]; then
+  if [[ ${$launch;;} == "y" ]]; then
     tmux attach -t default || tmux new-session -s default
   fi
   clear
 fi
-unsetopt nocasematch  # unset case sensitive
+# unsetopt nocasematch  # unset case sensitive
