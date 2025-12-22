@@ -116,7 +116,7 @@ source $ZSH/oh-my-zsh.sh
 ###########################################################
 
 # launch tmux automatically at launch
-shopt -s nocasematch # make case insensitive
+setopt -s nocasematch # make case insensitive
 if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
   read -p "[Tmux] Launch? (y/N): " launch
   if [[ "$launch" == "y" ]]; then
@@ -124,4 +124,4 @@ if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
   fi
   clear
 fi
-shopt -u nocasematch  # unset case sensitive
+setopt -u nocasematch  # unset case sensitive
