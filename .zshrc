@@ -124,3 +124,8 @@ if command -v tmux &>/dev/null; then
   clear
 fi
 # unsetopt nocasematch  # unset case sensitive
+
+# Add homebrew to path
+if [[ -d "/home/linuxbrew/.linuxbrew/bin/" ]]; then
+  export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
+fi
