@@ -129,3 +129,9 @@ fi
 if [[ -d "/home/linuxbrew/.linuxbrew/bin/" ]]; then
   export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
 fi
+
+# Add Android resource to path
+if [[ -d $HOME/Android/ ]]; then
+  export ANDROID_SDK_ROOT="$HOME/Android/Sdk/"
+  export PATH="$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin/:$HOME/Android/Sdk/platform-tools/"
+fi
