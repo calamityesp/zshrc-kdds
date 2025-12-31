@@ -133,3 +133,6 @@ if [[ "Darwin" == $(uname -s) ]]; then
 elif [[ "Linux" == $(uname -s) ]]; then
   source /home/linuxbrew/.linuxbrew/opt/asdf/libexec/asdf.sh
 fi
+
+# set java home
+export JAVA_HOME="$(asdf which java)"
