@@ -124,3 +124,10 @@ if command -v tmux &>/dev/null; then
   clear
 fi
 # unsetopt nocasematch  # unset case sensitive
+
+# running the shim setup script for asdf installed with homebrew
+if [[ "Darwin" == $(uname -s) ]]; then
+  source /opt/homebrew/opt/asdf/libexec/asdf.sh
+elif [[ "Linux" == $(uname -s) ]]; then
+  source /home/linuxbrew/.linuxbrew/opt/asdf/libexec/asdf.sh
+fi
