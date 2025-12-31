@@ -127,7 +127,9 @@ fi
 
 # running the shim setup script for asdf installed with homebrew
 if [[ "Darwin" == $(uname -s) ]]; then
+   # run the asdf script
   source /opt/homebrew/opt/asdf/libexec/asdf.sh
+  source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
 elif [[ "Linux" == $(uname -s) ]]; then
   source /home/linuxbrew/.linuxbrew/opt/asdf/libexec/asdf.sh
 fi
