@@ -73,7 +73,7 @@ ZSH_THEME="robbyrussell-kdds"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kdds)
+plugins=(git kdds kdds-asdf)
 
 if [[ "$KDDS_PROFILE" == "work" ]]; then
   plugins+="grasshopper"
