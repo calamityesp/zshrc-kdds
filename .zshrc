@@ -4,6 +4,9 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh-kdds"
 
+# Run asdf.sh script
+. "$(brew --prefix)/opt/asdf/libexec/asdf.sh"
+
 # Sourcing the profile
 source $ZSH/.kdds_profile
 
