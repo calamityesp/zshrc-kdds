@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh-kdds"
 source $ZSH/.kdds_profile
 
 # sourcing fzf completion
-if [ -d "$(brew --prefix)/opt/fzf" ]: then
+if [ -d "$(brew --prefix)/opt/fzf" ]; then
   source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
   source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
 fi
