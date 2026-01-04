@@ -7,8 +7,12 @@ export ZSH="$HOME/.oh-my-zsh-kdds"
 # Sourcing the profile
 source $ZSH/.kdds_profile
 
+# setting vi mode
+setopt vi
+
 # sourcing fzf completion
 if [ -d "$(brew --prefix)/opt/fzf" ]; then
+  bindkey '^R' fzf-history-widget
   source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
   source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
 fi
