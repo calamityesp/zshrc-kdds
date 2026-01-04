@@ -7,6 +7,12 @@ export ZSH="$HOME/.oh-my-zsh-kdds"
 # Sourcing the profile
 source $ZSH/.kdds_profile
 
+# sourcing fzf completion
+if [ -d "$(brew --prefix)/opt/fzf" ]: then
+  source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+  source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+fi
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
