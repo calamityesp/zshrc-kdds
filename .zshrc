@@ -145,3 +145,6 @@ if [[ -d $HOME/Android/ ]]; then
   export ANDROID_SDK_ROOT="$HOME/Android/Sdk/"
   export PATH="$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin/:$HOME/Android/Sdk/platform-tools/"
 fi
+
+# Capacitor Android Studio Path
+export CAPACITOR_ANDROID_STUDIO_PATH="$(which android-studio)"
