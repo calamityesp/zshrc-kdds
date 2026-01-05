@@ -10,6 +10,16 @@ export ZSH="$HOME/.oh-my-zsh-kdds"
 # Sourcing the profile
 source $ZSH/.kdds_profile
 
+# setting vi mode
+setopt vi
+
+# sourcing fzf completion
+if [ -d "$(brew --prefix)/opt/fzf" ]; then
+  bindkey '^R' fzf-history-widget
+  source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+  source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+fi
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -128,14 +138,17 @@ if command -v tmux &>/dev/null; then
 fi
 # unsetopt nocasematch  # unset case sensitive
 
-# running the shim setup script for asdf installed with homebrew
-if [[ "Darwin" == $(uname -s) ]]; then
-   # run the asdf script
-  source /opt/homebrew/opt/asdf/libexec/asdf.sh
-  source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
-elif [[ "Linux" == $(uname -s) ]]; then
-  source /home/linuxbrew/.linuxbrew/opt/asdf/libexec/asdf.sh
+# Add homebrew to path
+if [[ -d "/home/linuxbrew/.linuxbrew/bin/" ]]; then
+  export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
 fi
 
-# set java home
-export JAVA_HOME="$(asdf which java)"
+# Add Android resource to path
+if [[ -d $HOME/Android/ ]]; then
+  export ANDROID_SDK_ROOT="$HOME/Android/Sdk/"
+  export ANDROID_HOME="$HOME/Android/Sdk/"
+  export PATH="$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin/:$HOME/Android/Sdk/platform-tools/"
+fi
+
+# Capacitor Android Studio Path
+export CAPACITOR_ANDROID_STUDIO_PATH="$(which android-studio)"
