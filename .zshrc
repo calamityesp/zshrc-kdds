@@ -7,6 +7,16 @@ export ZSH="$HOME/.oh-my-zsh-kdds"
 # Sourcing the profile
 source $ZSH/.kdds_profile
 
+# setting vi mode
+setopt vi
+
+# sourcing fzf completion
+if [ -d "$(brew --prefix)/opt/fzf" ]; then
+  bindkey '^R' fzf-history-widget
+  source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+  source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+fi
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -73,7 +83,7 @@ ZSH_THEME="robbyrussell-kdds"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kdds)
+plugins=(git kdds kdds-asdf)
 
 if [[ "$KDDS_PROFILE" == "work" ]]; then
   plugins+="grasshopper"
@@ -124,3 +134,18 @@ if command -v tmux &>/dev/null; then
   clear
 fi
 # unsetopt nocasematch  # unset case sensitive
+
+# Add homebrew to path
+if [[ -d "/home/linuxbrew/.linuxbrew/bin/" ]]; then
+  export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
+fi
+
+# Add Android resource to path
+if [[ -d $HOME/Android/ ]]; then
+  export ANDROID_SDK_ROOT="$HOME/Android/Sdk/"
+  export ANDROID_HOME="$HOME/Android/Sdk/"
+  export PATH="$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin/:$HOME/Android/Sdk/platform-tools/"
+fi
+
+# Capacitor Android Studio Path
+export CAPACITOR_ANDROID_STUDIO_PATH="$(which android-studio)"
