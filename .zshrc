@@ -143,6 +143,7 @@ fi
 # Add Android resource to path
 if [[ -d $HOME/Android/ ]]; then
   export ANDROID_SDK_ROOT="$HOME/Android/Sdk/"
+  export ANDROID_HOME="$HOME/Android/Sdk/"
   export PATH="$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin/:$HOME/Android/Sdk/platform-tools/"
 fi
 
