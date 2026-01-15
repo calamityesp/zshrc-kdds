@@ -154,7 +154,7 @@ fi
 export CAPACITOR_ANDROID_STUDIO_PATH="$(which android-studio)"
 
 # add local aliases if exist
-if [[ -f "$ZSH/.kdds_aliases" ]]; then
-  export $ZSH/.kdds_aliases
+if [[ -f "$ZSH/.kdds_alias" ]]; then
+  source $ZSH/.kdds_alias
 fi
 
