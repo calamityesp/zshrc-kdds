@@ -3,6 +3,7 @@
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh-kdds"
+export PATH=$PATH:/Users/kshannon.pc/.local/bin
 
 # Run asdf.sh script
 . "$(brew --prefix)/opt/asdf/libexec/asdf.sh"
