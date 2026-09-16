@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh-kdds"
+export ZSH="$HOME/.oh-my-kdds"
 
 # Sourcing the profile
 source $ZSH/.kdds_profile
