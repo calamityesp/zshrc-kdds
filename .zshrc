@@ -1,21 +1,109 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-kdds"
-
-# Sourcing the profile
-source $ZSH/.kdds_profile
-
+#
+####################################################
+#  SECTION: SHELL SETTINGS
+##################################################
 # setting vi mode
 setopt vi
 
-# sourcing fzf completion
-if [ -d "$(brew --prefix)/opt/fzf" ]; then
-  bindkey '^R' fzf-history-widget
-  source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
-  source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+
+###################################################
+#  SECTION: CONSTANTS
+##################################################
+ZSH_KDDS_HOME="$HOME/.oh-my-kdds/"
+DOTFILES_HOME="$HOME/Dotfiles"
+OBSIDIAN_HOME="$HOME/Obsidian"
+ZSH_PROFILE="$ZSH_KDDS_HOME/.kdds_profile"
+HOME_BIN_DIR="$HOME/.local/bin"
+
+# Android Constants
+ANDROID_SDK_ROOT_DIR="$HOME/Android/Sdk/"
+ANDROID_HOME_DIR="$HOME/Android/Sdk/"
+ANDROID_SDK_BIN="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/"
+ANDROID_SDK_PLATFORM_TOOLS="$ANDROID_SDK_ROOT/platform-tools"
+
+
+# Brew Constants (Check Default Directories)
+if command -v "brew" &>/dev/null ; then
+   BREW_HOME="$(brew --prefix)"
+elif [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+  BREW_HOME="/home/linuxbrew/.linuxbrew"
+elif [[ -x "$HOME/.linuxbrew/bin/brew" ]]; then
+  BREW_HOME="$HOME/.linuxbrew"
+elif [[ -x "/opt/homebrew/bin/brew" ]]; then
+  BREW_HOME="/opt/homebrew"
+elif [[ -x "/usr/local/bin/brew" ]]; then
+  BREW_HOME="/usr/local"
+else
+  BREW_HOME=""
 fi
+
+if [[ -d "$BREW_HOME" ]]; then
+   BREW_HOME_BIN="$BREW_HOME/bin"
+   BREW_FZF="$BREW_HOME/opt/fzf"
+   BREW_FZF_SHELL="$BREW_HOME/opt/fzf/shell"
+   BREW_FZF_SHELL_KEYBINDINGS="$BREW_FZF_SHELL/key-bindings.zsh"
+   BREW_FZF_SHELL_COMPLETIONS="$BREW_FZF_SHELL/completion.zsh"
+fi
+
+###################################################
+#  SECTION: ENV VARIABLE SETTING
+##################################################
+# Path to your Oh My Zsh installation.
+export ZSH="${ZSH_KDDS_HOME}"
+
+# Capacitor Android Studio Path
+export CAPACITOR_ANDROID_STUDIO_PATH="$(which android-studio)"
+
+# Android Home Env
+if [[ -d $HOME/Android/ ]]; then
+  export ANDROID_SDK_ROOT="$ANDROID_SDK_ROOT_DIR"
+  export ANDROID_HOME="$ANDROID_HOME_DIR"
+fi
+
+###################################################
+#  SECTION: PATH SETTING
+##################################################
+# Path Variables
+dir=(
+   ANDROID_SDK_BIN
+   ANDROID_SDK_PLATFORM_TOOLS
+   HOME_BIN_DIR
+)
+
+# 1. Add homebrew to path
+if [[ -d "$BREW_HOME" ]]; then
+   dir+="$BREW_HOME_BIN"
+fi
+
+# 2. Combine the path
+for p in "${dir[@]}"; do
+   if [ -d "$p" ]; then
+      export PATH="$p:$PATH"
+   fi
+done
+
+
+###################################################
+#  SECTION: SOURCING
+##################################################
+# Sourcing the profile (sets $KDDS_PROFILE)
+source $ZSH_PROFILE
+printf "ZSH_PROFILE=$KDDS_PROFILE\n"
+
+# sourcing fzf completion
+if [ -d "$BREW_FZF" ]; then
+  bindkey '^R' fzf-history-widget
+  source "$BREW_FZF_SHELL_KEYBINDINGS"
+  source "$BREW_FZF_SHELL_COMPLETIONS"
+fi
+
+
+
+###################################################
+#  SECTION: OHMYKDDS(OHMYZSH) SETTINGS
+##################################################
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -36,12 +124,14 @@ ZSH_THEME="robbyrussell-kdds"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
+#--------------------------
+# Auto-update behavior
+#--------------------------
+ zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-# Uncomment the following line to change how often to auto-update (in days).
+# Auto-update intervals (in days).
 # zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
@@ -82,16 +172,21 @@ ZSH_THEME="robbyrussell-kdds"
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git kdds kdds-asdf asdf)
 
 if [[ "$KDDS_PROFILE" == "work" ]]; then
   plugins+="grasshopper"
 fi
 
+## Execute settings
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+
+
+
+###################################################################
+# RANDOM JUNK
+###################################################################
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -127,25 +222,11 @@ source $ZSH/oh-my-zsh.sh
 
 # launch tmux automatically at launch
 # setopt nocasematch # make case insensitivo
-if command -v tmux &>/dev/null; then
-  if [[ -z "$TMUX" ]]; then
-    tmux attach -t default || tmux new-session -s default
-  fi
-  clear
-fi
+# if command -v tmux &>/dev/null; then
+#   if [[ -z "$TMUX" ]]; then
+#     tmux attach -t default || tmux new-session -s default
+#   fi
+#   clear
+# fi
 # unsetopt nocasematch  # unset case sensitive
 
-# Add homebrew to path
-if [[ -d "/home/linuxbrew/.linuxbrew/bin/" ]]; then
-  export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
-fi
-
-# Add Android resource to path
-if [[ -d $HOME/Android/ ]]; then
-  export ANDROID_SDK_ROOT="$HOME/Android/Sdk/"
-  export ANDROID_HOME="$HOME/Android/Sdk/"
-  export PATH="$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin/:$HOME/Android/Sdk/platform-tools/"
-fi
-
-# Capacitor Android Studio Path
-export CAPACITOR_ANDROID_STUDIO_PATH="$(which android-studio)"
