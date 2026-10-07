@@ -11,17 +11,17 @@ setopt vi
 ###################################################
 #  SECTION: CONSTANTS
 ##################################################
-ZSH_KDDS_HOME="$HOME/.oh-my-kdds/"
+ZSH_KDDS_HOME="$HOME/.oh-my-kdds"
 DOTFILES_HOME="$HOME/Dotfiles"
 OBSIDIAN_HOME="$HOME/Obsidian"
 ZSH_PROFILE="$ZSH_KDDS_HOME/.kdds_profile"
 HOME_BIN_DIR="$HOME/.local/bin"
 
 # Android Constants
-ANDROID_SDK_ROOT_DIR="$HOME/Android/Sdk/"
-ANDROID_HOME_DIR="$HOME/Android/Sdk/"
-ANDROID_SDK_BIN="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/"
-ANDROID_SDK_PLATFORM_TOOLS="$ANDROID_SDK_ROOT/platform-tools"
+ANDROID_SDK_ROOT_DIR="$HOME/Android/Sdk"
+ANDROID_HOME_DIR="$HOME/Android/Sdk"
+ANDROID_SDK_BIN="$ANDROID_SDK_ROOT_DIR/cmdline-tools/latest/bin"
+ANDROID_SDK_PLATFORM_TOOLS="$ANDROID_SDK_ROOT_DIR/platform-tools"
 
 
 # Brew Constants (Check Default Directories)
@@ -57,19 +57,17 @@ export ZSH="${ZSH_KDDS_HOME}"
 export CAPACITOR_ANDROID_STUDIO_PATH="$(which android-studio)"
 
 # Android Home Env
-if [[ -d $HOME/Android/ ]]; then
-  export ANDROID_SDK_ROOT="$ANDROID_SDK_ROOT_DIR"
-  export ANDROID_HOME="$ANDROID_HOME_DIR"
-fi
+export ANDROID_SDK_ROOT="$ANDROID_SDK_ROOT_DIR"
+export ANDROID_HOME="$ANDROID_HOME_DIR"
 
 ###################################################
 #  SECTION: PATH SETTING
 ##################################################
 # Path Variables
 dir=(
-   ANDROID_SDK_BIN
-   ANDROID_SDK_PLATFORM_TOOLS
-   HOME_BIN_DIR
+   "$ANDROID_SDK_BIN"
+   "$ANDROID_SDK_PLATFORM_TOOLS"
+   "$HOME_BIN_DIR"
 )
 
 # 1. Add homebrew to path
